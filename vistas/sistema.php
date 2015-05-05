@@ -57,9 +57,7 @@ if (isset($_SESSION['nivel'])){
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Registrar Proyecto
-                    </a>
+                    <a href="/boot/index.php/sistema?registrar=p">Registrar proyecto</a>
                 </li>
                 <li>
                     <a href="/boot/index.php/sistema?registrar=e">Registrar estudiantes</a>
@@ -95,6 +93,12 @@ if (isset($_SESSION['nivel'])){
                     <div class="col-lg-6">
                         <h1>
                            <?php 
+
+                        if (isset($_GET['registrar'])){
+                          if($_GET['registrar']=='p'){
+                          echo "Registro de Proyectos";
+                          }}
+
                         if (isset($_GET['registrar'])){
                           if($_GET['registrar']=='e'){
                           echo "Registro de Estudiantes";
@@ -113,6 +117,11 @@ if (isset($_SESSION['nivel'])){
                         </h1>
                         
                         <?php 
+
+                        if (isset($_GET['registrar'])){
+                          if($_GET['registrar']=='p'){
+                          include "/vistas/registrarproyecto.php";
+                          }}
 
                         if (isset($_GET['registrar'])){
                           if($_GET['registrar']=='e'){

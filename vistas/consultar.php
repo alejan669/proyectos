@@ -68,7 +68,8 @@ session_start();
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='name'){echo "active";}}?> ?>"><a href="?type=name" >Nombre</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='year'){echo "active";}}?> ?>"><a href="?type=year">Año/Semestre</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='line'){echo "active";}}?> ?>"><a href="?type=line">Lineas de investigacion</a></li>
-                        <li role="presentation"><a href="#">Jurados</a></li>
+                        <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='jura'){echo "active";}}?> ?>"><a href="?type=jura">Jurados</a></li>
+                          <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='dire'){echo "active";}}?> ?>"><a href="?type=dire">Directores</a></li>
                         </ul>
 
                    </div>
@@ -105,6 +106,32 @@ session_start();
                           if (isset($_GET['type'])){
                           if($_GET['type']=='line'){
                           include "/vistas/proyectoline.php";
+
+                          }
+                          }
+                          if (isset($_GET['type'])){
+                          if($_GET['type']=='jura'){
+                          include "/vistas/proyectojura.php";
+
+                          }
+                          }
+                          if (isset($_GET['type'])){
+                          if($_GET['type']=='dire'){
+                          include "/vistas/proyectodire.php";
+
+                          }
+                          }
+
+                          
+                           if (isset($_GET['proyectojura'])){
+                          if($_GET['proyectojura']=='succes'){
+                          include "/vistas/proyectojura.php";
+
+                          }
+                          }
+                          if (isset($_GET['proyectodire'])){
+                          if($_GET['proyectodire']=='succes'){
+                          include "/vistas/proyectodire.php";
 
                           }
                           }?>

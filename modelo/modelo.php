@@ -13,6 +13,147 @@ function conectar_base_de_datos (){
 function cerrar_conexion_db($conexion){
     mysqli_close($conexion);
 } 
+function pdirector(){
+
+$conexion=conectar_base_de_datos();
+    $jurado = $_GET['No_director'];
+    $consulta="SELECT * FROM proyecto_persona where codigo_persona =".$jurado." and tipo ='D'";
+    $resultado=mysqli_query($conexion,$consulta);
+    while ($fila=mysqli_fetch_array($resultado)) {
+       
+        $_SESSION['seleccionproyecto'][]= $fila['codigo_proyecto'];
+
+        $consulta="SELECT titulo FROM proyecto where codigo_proyecto =".$fila['codigo_proyecto']."";
+    $resultado1=mysqli_query($conexion,$consulta);
+    while ($filas=mysqli_fetch_array($resultado1)) {
+        $_SESSION['seleccionproyecto'][]= $filas['titulo'];
+        
+    }
+    }       
+    header("Location: /boot/index.php/consultar?proyectodire=succes");
+}
+function pjurado(){
+
+$conexion=conectar_base_de_datos();
+    $jurado = $_GET['No_jurado'];
+    $consulta="SELECT * FROM proyecto_persona where codigo_persona =".$jurado." and tipo ='J'";
+    $resultado=mysqli_query($conexion,$consulta);
+    while ($fila=mysqli_fetch_array($resultado)) {
+       
+        $_SESSION['seleccionproyecto'][]= $fila['codigo_proyecto'];
+
+        $consulta="SELECT titulo FROM proyecto where codigo_proyecto =".$fila['codigo_proyecto']."";
+    $resultado1=mysqli_query($conexion,$consulta);
+    while ($filas=mysqli_fetch_array($resultado1)) {
+        $_SESSION['seleccionproyecto'][]= $filas['titulo'];
+        
+    }
+    }       
+    header("Location: /boot/index.php/consultar?proyectojura=succes");
+}
+ function buscardirector(){
+
+ $connect=conectar_base_de_datos();
+    sleep(1);
+    $search = '';
+    if(isset($_POST['search'])){
+        $search=utf8_encode($_POST['search']);
+    }
+
+
+    $consulta="SELECT * from persona p, proyecto_persona pp where p.codigo_persona = pp.codigo_persona and pp.tipo ='D' and p.nombre LIKE '%".$search."%' group by p.nombre";
+    
+    $resultado = mysqli_query($connect, $consulta);
+
+    $fila=mysqli_fetch_assoc($resultado);
+    $total =mysqli_num_rows($resultado);
+
+
+?>
+<?php 
+
+if($total > 0 && $search!=''){?>
+
+    <h4>Resultados de la busqueda</h4>
+    <?php 
+        do { ?>
+                <div class="art">
+                <?php
+                    
+
+                 echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_director?No_director=".$fila['codigo_persona']."' role='button'>".$fila['nombre']." ".$fila['apellido']." &raquo;</a></p>");
+                
+                ?>
+                </div>
+        <?php }while($fila=mysqli_fetch_assoc($resultado)); ?>
+    
+<?php } 
+
+elseif ($total > 0 && $search=='') {
+    echo "
+    <h4>ingresa un parametro de busqueda</h4><p>Ingresa palabras clave relacionadas</p>
+    ";}
+    else{
+        echo "
+    <h4>No hay resultados</h4><p>Intentalo de nuevo</p>
+    ";
+    }
+    # code...
+
+
+ }
+function buscarjurado(){
+
+ $connect=conectar_base_de_datos();
+    sleep(1);
+    $search = '';
+    if(isset($_POST['search'])){
+        $search=utf8_encode($_POST['search']);
+    }
+
+
+    $consulta="SELECT * from persona p, proyecto_persona pp where p.codigo_persona = pp.codigo_persona and pp.tipo ='J' and p.nombre LIKE '%".$search."%' group by p.nombre";
+    
+    $resultado = mysqli_query($connect, $consulta);
+
+    $fila=mysqli_fetch_assoc($resultado);
+    $total =mysqli_num_rows($resultado);
+
+
+?>
+<?php 
+
+if($total > 0 && $search!=''){?>
+
+    <h4>Resultados de la busqueda</h4>
+    <?php 
+        do { ?>
+                <div class="art">
+                <?php
+                    
+
+                 echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_jurado?No_jurado=".$fila['codigo_persona']."' role='button'>".$fila['nombre']." ".$fila['apellido']." &raquo;</a></p>");
+                
+                ?>
+                </div>
+        <?php }while($fila=mysqli_fetch_assoc($resultado)); ?>
+    
+<?php } 
+
+elseif ($total > 0 && $search=='') {
+    echo "
+    <h4>ingresa un parametro de busqueda</h4><p>Ingresa palabras clave relacionadas</p>
+    ";}
+    else{
+        echo "
+    <h4>No hay resultados</h4><p>Intentalo de nuevo</p>
+    ";
+    }
+    # code...
+
+
+
+}
 
 function sacarproyectos(){
     $conexion=conectar_base_de_datos();
@@ -146,33 +287,67 @@ function proyecto (){
     
     }
 
-function crearestudiante(){
+function crearproyecto(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
         $nombre= $_POST['nombre'];
         $email= $_POST['email'];
         $email1=$_POST['email1'];
         $apellido= $_POST['apellido'];
         $telefono = $_POST['telefono'];
         $telefono1 = $_POST['telefono1'];
-        $codigo =$_POST['codigo'];
-        $consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO estudiante_email VALUES('$codigo','$email')";
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
         mysqli_query($conexion, $consulta);
         if (!empty($email1)) {
-            $consulta = "INSERT INTO estudiante_email VALUES('$codigo','$email1')";
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
         }
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO estudiante_telefono VALUES('$codigo','$telefono')";
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
         mysqli_query($conexion, $consulta);
         if (!empty($telefono1)) {
-            $consulta = "INSERT INTO estudiante_telefono VALUES('$codigo','$telefono1')";
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
         }
         mysqli_query($conexion, $consulta);
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
+
+}
+
+function crearestudiante(){
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+        $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
+        $nombre= $_POST['nombre'];
+        $email= $_POST['email'];
+        $email1=$_POST['email1'];
+        $apellido= $_POST['apellido'];
+        $telefono = $_POST['telefono'];
+        $telefono1 = $_POST['telefono1'];
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
+        mysqli_query($conexion, $consulta);
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
+        mysqli_query($conexion, $consulta);
+        if (!empty($email1)) {
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
+        }
+        mysqli_query($conexion, $consulta);
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
+        mysqli_query($conexion, $consulta);
+        if (!empty($telefono1)) {
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
+        }
+        mysqli_query($conexion, $consulta);
+        cerrar_conexion_db($conexion);
+        
+    }
+    header("Location: /boot/index.php/succes");
 
 }
 
@@ -180,45 +355,90 @@ function crearestudiante(){
 function creardocente(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
         $nombre= $_POST['nombre'];
-        $apellido= $_POST['apellido'];
         $email= $_POST['email'];
-        $email1=$_POST['email1'];        
+        $email1=$_POST['email1'];
+        $apellido= $_POST['apellido'];
         $telefono = $_POST['telefono'];
         $telefono1 = $_POST['telefono1'];
-        $codigo =$_POST['codigo'];
-        
-        $consulta = "INSERT INTO docentes VALUES('$codigo','$nombre','$apellido')";
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO docente_email VALUES('$codigo','$email')";
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
         mysqli_query($conexion, $consulta);
         if (!empty($email1)) {
-            $consulta = "INSERT INTO docente_email VALUES('$codigo','$email1')";
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
         }
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO docente_telefono VALUES('$codigo','$telefono')";
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
         mysqli_query($conexion, $consulta);
         if (!empty($telefono1)) {
-            $consulta = "INSERT INTO docente_telefono VALUES('$codigo','$telefono1')";
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
         }
         mysqli_query($conexion, $consulta);
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
 
 }
+
+/*
+     create procedure insertarfacultad(){
+
+        @codigo varchar(9), @nombre varchar(50)
+        as
+
+        insert into facultad
+        values(@codigo,@nombre)
+
+        //llamar procedimiento
+        mysql_query("call insertarfacultad('$codigo','$nombre')");
+    }
+
+
+    Create trigger trg_Empleado_Log(){
+    on Empleado
+    after insert,update
+    as
+    BEGIN
+
+    set nocount on;
+
+    declare
+    @nombre varchar(20),
+    @apellido varchar(20)
+
+    select @nombre = nombre,@apellido = apellido 
+    from inserted
+
+    declare
+    @direccion varchar(100),
+    @edad int
+
+    set @direccion='Av 15, Santa Marina'
+    set @edad = 22
+
+    begin
+        insert into Empleado_Log values(@nombre,@apellido,@direccion,@edad )
+    end
+}
+*/
+
 function crearfacultad(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
         $nombre= $_POST['nombre'];
         $codigo =$_POST['codigo'];
-        
         $consulta = "INSERT INTO facultad VALUES('$codigo','$nombre')";
         mysqli_query($conexion, $consulta);
+
         
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
 
 }
 
