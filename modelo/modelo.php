@@ -13,6 +13,147 @@ function conectar_base_de_datos (){
 function cerrar_conexion_db($conexion){
     mysqli_close($conexion);
 } 
+function pdirector(){
+
+$conexion=conectar_base_de_datos();
+    $jurado = $_GET['No_director'];
+    $consulta="SELECT * FROM proyecto_persona where codigo_persona =".$jurado." and tipo ='D'";
+    $resultado=mysqli_query($conexion,$consulta);
+    while ($fila=mysqli_fetch_array($resultado)) {
+       
+        $_SESSION['seleccionproyecto'][]= $fila['codigo_proyecto'];
+
+        $consulta="SELECT titulo FROM proyecto where codigo_proyecto =".$fila['codigo_proyecto']."";
+    $resultado1=mysqli_query($conexion,$consulta);
+    while ($filas=mysqli_fetch_array($resultado1)) {
+        $_SESSION['seleccionproyecto'][]= $filas['titulo'];
+        
+    }
+    }       
+    header("Location: /boot/index.php/consultar?proyectodire=succes");
+}
+function pjurado(){
+
+$conexion=conectar_base_de_datos();
+    $jurado = $_GET['No_jurado'];
+    $consulta="SELECT * FROM proyecto_persona where codigo_persona =".$jurado." and tipo ='J'";
+    $resultado=mysqli_query($conexion,$consulta);
+    while ($fila=mysqli_fetch_array($resultado)) {
+       
+        $_SESSION['seleccionproyecto'][]= $fila['codigo_proyecto'];
+
+        $consulta="SELECT titulo FROM proyecto where codigo_proyecto =".$fila['codigo_proyecto']."";
+    $resultado1=mysqli_query($conexion,$consulta);
+    while ($filas=mysqli_fetch_array($resultado1)) {
+        $_SESSION['seleccionproyecto'][]= $filas['titulo'];
+        
+    }
+    }       
+    header("Location: /boot/index.php/consultar?proyectojura=succes");
+}
+ function buscardirector(){
+
+ $connect=conectar_base_de_datos();
+    sleep(1);
+    $search = '';
+    if(isset($_POST['search'])){
+        $search=utf8_encode($_POST['search']);
+    }
+
+
+    $consulta="SELECT * from persona p, proyecto_persona pp where p.codigo_persona = pp.codigo_persona and pp.tipo ='D' and p.nombre LIKE '%".$search."%' group by p.nombre";
+    
+    $resultado = mysqli_query($connect, $consulta);
+
+    $fila=mysqli_fetch_assoc($resultado);
+    $total =mysqli_num_rows($resultado);
+
+
+?>
+<?php 
+
+if($total > 0 && $search!=''){?>
+
+    <h4>Resultados de la busqueda</h4>
+    <?php 
+        do { ?>
+                <div class="art">
+                <?php
+                    
+
+                 echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_director?No_director=".$fila['codigo_persona']."' role='button'>".$fila['nombre']." ".$fila['apellido']." &raquo;</a></p>");
+                
+                ?>
+                </div>
+        <?php }while($fila=mysqli_fetch_assoc($resultado)); ?>
+    
+<?php } 
+
+elseif ($total > 0 && $search=='') {
+    echo "
+    <h4>ingresa un parametro de busqueda</h4><p>Ingresa palabras clave relacionadas</p>
+    ";}
+    else{
+        echo "
+    <h4>No hay resultados</h4><p>Intentalo de nuevo</p>
+    ";
+    }
+    # code...
+
+
+ }
+function buscarjurado(){
+
+ $connect=conectar_base_de_datos();
+    sleep(1);
+    $search = '';
+    if(isset($_POST['search'])){
+        $search=utf8_encode($_POST['search']);
+    }
+
+
+    $consulta="SELECT * from persona p, proyecto_persona pp where p.codigo_persona = pp.codigo_persona and pp.tipo ='J' and p.nombre LIKE '%".$search."%' group by p.nombre";
+    
+    $resultado = mysqli_query($connect, $consulta);
+
+    $fila=mysqli_fetch_assoc($resultado);
+    $total =mysqli_num_rows($resultado);
+
+
+?>
+<?php 
+
+if($total > 0 && $search!=''){?>
+
+    <h4>Resultados de la busqueda</h4>
+    <?php 
+        do { ?>
+                <div class="art">
+                <?php
+                    
+
+                 echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_jurado?No_jurado=".$fila['codigo_persona']."' role='button'>".$fila['nombre']." ".$fila['apellido']." &raquo;</a></p>");
+                
+                ?>
+                </div>
+        <?php }while($fila=mysqli_fetch_assoc($resultado)); ?>
+    
+<?php } 
+
+elseif ($total > 0 && $search=='') {
+    echo "
+    <h4>ingresa un parametro de busqueda</h4><p>Ingresa palabras clave relacionadas</p>
+    ";}
+    else{
+        echo "
+    <h4>No hay resultados</h4><p>Intentalo de nuevo</p>
+    ";
+    }
+    # code...
+
+
+
+}
 
 function sacarproyectos(){
     $conexion=conectar_base_de_datos();
@@ -24,15 +165,22 @@ function sacarproyectos(){
     }
 }
 function proyectos_line(){
-$conexion=conectar_base_de_datos();
 $line = $_POST['linea'];
-
-$consulta="SELECT * FROM proyecto where proyecto_linea = '".$line."'";
-    $resultado=mysqli_query($conexion,$consulta);
-    while ($fila=mysqli_fetch_array($resultado)) {
-        $_SESSION['seleccionproyecto'][]= $fila['codigo_proyecto'];
-        $_SESSION['seleccionproyecto'][]= $fila['titulo'];
+$mysqli = conectar_base_de_datos();
+//CREATE PROCEDURE getline(IN line_selected INT) BEGIN SELECT * FROM proyecto where proyecto_linea = line_selected; END$$ pegarlo en la consola phpmyadmin
+if (!$mysqli->multi_query("CALL getline($line)")) {
+    echo "Falló la llamada: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+do {
+    if ($res = $mysqli->store_result()) {  
+        $_SESSION['seleccionproyecto'] = $res->fetch_all();
+        $res->free();
+    } else {
+        if ($mysqli->errno) {
+            echo "Store failed: (" . $mysqli->errno . ") " . $mysqli->error;
+        }
     }
+} while ($mysqli->more_results() && $mysqli->next_result());
 header("Location: /boot/index.php/consultar?proyectoline=succes");
 }
 

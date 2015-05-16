@@ -23,6 +23,7 @@
 			  </select><br>
 			  <button type="submit" class="btn btn-primary">Consultar</button>
 		  </form>
+		  <hr />
 	</div>
 <?php
 if(isset($_SESSION['seleccionproyecto'])){

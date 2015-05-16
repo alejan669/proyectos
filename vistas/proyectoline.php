@@ -18,13 +18,15 @@
        			";}?>
 			  </select><br>
 			  <button type="submit" class="btn btn-primary">Consultar</button>
+			  <hr />
 		  </form>
 
 			</div>
 <?php
+
 			if(isset($_SESSION['seleccionproyecto'])){
-for ($i=0; $i < count($_SESSION['seleccionproyecto']); $i+=2) { 
-	echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_proyecto?No_proyecto=".$_SESSION['seleccionproyecto'][$i]."' role='button'>".substr($_SESSION['seleccionproyecto'][$i+1],0,50)." &raquo;</a></p>");
+for ($i=0; $i < count($_SESSION['seleccionproyecto']); $i++) { 
+	echo utf8_encode("<p><a class='btn btn-primary btn-lg' href='/boot/index.php/consultar_proyecto?No_proyecto=".$_SESSION['seleccionproyecto'][$i][0]."' role='button'>".substr($_SESSION['seleccionproyecto'][$i][1],0,50)." &raquo;</a></p>");
 }
 	}else{
 

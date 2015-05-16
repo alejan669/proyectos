@@ -63,7 +63,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Ultimos proyectos</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p>En esta pagina web usted prodra consultar cualquier proyecto, pasantia de la universidad de cundinamarca que se encuentre en proceso o aprobado, por favor haga clic en consultar</p>
         <p><a class="btn btn-primary btn-lg" href="/boot/index.php/consultar" role="button">Consultar &raquo;</a></p>
       </div>
     </div>
@@ -78,21 +78,21 @@
           ?>
           </h2>
           <p>Para todo el resumen del proyecto clic abajo</p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][0] ?>" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][0] ?>" role="button">Ver &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2><?php 
           echo utf8_encode($_SESSION['proyectos_home'][1]); 
           ?></h2>
           <p>Para todo el resumen del proyecto clic abajo </p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][1] ?>" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][1] ?>" role="button">Ver &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2><?php 
           echo utf8_encode($_SESSION['proyectos_home'][2]); 
           ?></h2>
           <p>Para todo el resumen del proyecto clic abajo</p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][2] ?>" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][2] ?>" role="button">Ver &raquo;</a></p>
         </div>
       </div>
 

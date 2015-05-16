@@ -8,7 +8,20 @@ session_start();
     if($uri=="/boot/index.php/form_line"){
       formconsultarlineaction();
     }
-
+    if($uri=="/boot/index.php/consultar?type=jura"){
+       consultaraction();
+    }
+    if($uri=="/boot/index.php/consultar?proyectojura=succes"){
+       consultaraction();
+    }
+      if($uri=="/boot/index.php/consultar?proyectodire=succes"){
+       consultaraction();
+    }
+    
+    
+    if($uri=="/boot/index.php/consultar?type=dire"){
+       consultaraction();
+    }
     if($uri=="/boot/index.php/consultar?proyectoline=succes"){
         consultaraction();
     }
@@ -59,6 +72,13 @@ session_start();
      enviar_consulta();
     }
     
+    if($uri=="/boot/index.php/consultar/searchdire"){
+     enviardire_consulta();
+    }
+      if($uri=="/boot/index.php/consultar/searchjura"){
+     enviarjura_consulta();
+    }
+    
         if($uri=="/boot/index.php/sistema?registrar=e"){
      logueosuccesaction();
     }
@@ -90,7 +110,13 @@ session_start();
     if($uri[0]=="/boot/index.php/consultar_proyecto"){
       mostrarproyecto();
     }
-    
+     if($uri[0]=="/boot/index.php/consultar_jurado"){
+      sacarpjurado();
+    }
+    if($uri[0]=="/boot/index.php/consultar_director"){
+      sacarpdirector();
+    }
+
     
     
 ?>

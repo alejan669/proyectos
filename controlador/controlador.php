@@ -1,9 +1,22 @@
 <?php
-
+function  sacarpjurado(){
+	pjurado();
+}
+function sacarpdirector(){
+	pdirector();
+}
 function formconsultarlineaction(){
 	proyectos_line();
 }
+function  enviarjura_consulta(){
+	
+	buscarjurado();
 
+}
+function enviardire_consulta(){
+	buscardirector();
+
+}
 function mostrarproyecto(){
 	mostrarp();
 }
