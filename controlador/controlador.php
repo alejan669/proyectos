@@ -11,12 +11,21 @@ function formconsultarlineaction(){
 function  enviarjura_consulta(){
 	
 	buscarjurado();
+<<<<<<< HEAD
 
 }
 function enviardire_consulta(){
 	buscardirector();
 
 }
+=======
+
+}
+function enviardire_consulta(){
+	buscardirector();
+
+}
+>>>>>>> origin/master
 function mostrarproyecto(){
 	mostrarp();
 }
@@ -49,6 +58,11 @@ logueo();
 function enviar_consulta(){
 	buscaralgo();
 }
+
+function registrarproyecto(){
+	crearproyecto();
+}
+
 function registrarestudiante(){
 	crearestudiante();
 }

@@ -65,11 +65,19 @@ session_start();
                    <div class="col-md-3">
                    <div class="panel panel-default" id="opc">
                         <ul class="nav nav-pills nav-stacked" id ='opc1'>
+<<<<<<< HEAD
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='name'){echo "active";}} ?> "><a href="?type=name" >Nombre</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='year'){echo "active";}}  if (isset($_GET['proyectoyear'])){if($_GET['proyectoyear']=='succes'){echo "active";}}  ?>  "><a href="?type=year">Año/Semestre</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='line'){echo "active";}}  if (isset($_GET['proyectoline'])){if($_GET['proyectoline']=='succes'){echo "active";}}?> "><a href="?type=line">Lineas de investigacion</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='jura'){echo "active";}}  if (isset($_GET['proyectojura'])){if($_GET['proyectojura']=='succes'){echo "active";}}?> "><a href="?type=jura">Jurados</a></li>
                         <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='dire'){echo "active";}}  if (isset($_GET['proyectodire'])){if($_GET['proyectodire']=='succes'){echo "active";}}?> "><a href="?type=dire">Directores</a></li>
+=======
+                        <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='name'){echo "active";}}?> ?>"><a href="?type=name" >Nombre</a></li>
+                        <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='year'){echo "active";}}?> ?>"><a href="?type=year">Año/Semestre</a></li>
+                        <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='line'){echo "active";}}?> ?>"><a href="?type=line">Lineas de investigacion</a></li>
+                        <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='jura'){echo "active";}}?> ?>"><a href="?type=jura">Jurados</a></li>
+                          <li role="presentation" class="<?php   if (isset($_GET['type'])){if($_GET['type']=='dire'){echo "active";}}?> ?>"><a href="?type=dire">Directores</a></li>
+>>>>>>> origin/master
                         </ul>
                     </div>
                    </div>

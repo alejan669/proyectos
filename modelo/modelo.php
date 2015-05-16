@@ -294,33 +294,67 @@ function proyecto (){
     
     }
 
-function crearestudiante(){
+function crearproyecto(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
         $nombre= $_POST['nombre'];
         $email= $_POST['email'];
         $email1=$_POST['email1'];
         $apellido= $_POST['apellido'];
         $telefono = $_POST['telefono'];
         $telefono1 = $_POST['telefono1'];
-        $codigo =$_POST['codigo'];
-        $consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO estudiante_email VALUES('$codigo','$email')";
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
         mysqli_query($conexion, $consulta);
         if (!empty($email1)) {
-            $consulta = "INSERT INTO estudiante_email VALUES('$codigo','$email1')";
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
         }
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO estudiante_telefono VALUES('$codigo','$telefono')";
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
         mysqli_query($conexion, $consulta);
         if (!empty($telefono1)) {
-            $consulta = "INSERT INTO estudiante_telefono VALUES('$codigo','$telefono1')";
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
         }
         mysqli_query($conexion, $consulta);
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
+
+}
+
+function crearestudiante(){
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+        $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
+        $nombre= $_POST['nombre'];
+        $email= $_POST['email'];
+        $email1=$_POST['email1'];
+        $apellido= $_POST['apellido'];
+        $telefono = $_POST['telefono'];
+        $telefono1 = $_POST['telefono1'];
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
+        mysqli_query($conexion, $consulta);
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
+        mysqli_query($conexion, $consulta);
+        if (!empty($email1)) {
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
+        }
+        mysqli_query($conexion, $consulta);
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
+        mysqli_query($conexion, $consulta);
+        if (!empty($telefono1)) {
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
+        }
+        mysqli_query($conexion, $consulta);
+        cerrar_conexion_db($conexion);
+        
+    }
+    header("Location: /boot/index.php/succes");
 
 }
 
@@ -328,45 +362,90 @@ function crearestudiante(){
 function creardocente(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
+        $codigo =$_POST['codigo'];
         $nombre= $_POST['nombre'];
-        $apellido= $_POST['apellido'];
         $email= $_POST['email'];
-        $email1=$_POST['email1'];        
+        $email1=$_POST['email1'];
+        $apellido= $_POST['apellido'];
         $telefono = $_POST['telefono'];
         $telefono1 = $_POST['telefono1'];
-        $codigo =$_POST['codigo'];
-        
-        $consulta = "INSERT INTO docentes VALUES('$codigo','$nombre','$apellido')";
+        //$consulta = "INSERT INTO estudiantes VALUES('$codigo','$nombre','$apellido','20150101')";
+        $consulta = "INSERT INTO persona VALUES('$codigo','$nombre','$apellido')";
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO docente_email VALUES('$codigo','$email')";
+        $consulta = "INSERT INTO persona_email VALUES('$codigo','$email')";
         mysqli_query($conexion, $consulta);
         if (!empty($email1)) {
-            $consulta = "INSERT INTO docente_email VALUES('$codigo','$email1')";
+            $consulta = "INSERT INTO persona_email VALUES('$codigo','$email1')";
         }
         mysqli_query($conexion, $consulta);
-        $consulta = "INSERT INTO docente_telefono VALUES('$codigo','$telefono')";
+        $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono')";
         mysqli_query($conexion, $consulta);
         if (!empty($telefono1)) {
-            $consulta = "INSERT INTO docente_telefono VALUES('$codigo','$telefono1')";
+            $consulta = "INSERT INTO persona_telefono VALUES('$codigo','$telefono1')";
         }
         mysqli_query($conexion, $consulta);
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
 
 }
+
+/*
+     create procedure insertarfacultad(){
+
+        @codigo varchar(9), @nombre varchar(50)
+        as
+
+        insert into facultad
+        values(@codigo,@nombre)
+
+        //llamar procedimiento
+        mysql_query("call insertarfacultad('$codigo','$nombre')");
+    }
+
+
+    Create trigger trg_Empleado_Log(){
+    on Empleado
+    after insert,update
+    as
+    BEGIN
+
+    set nocount on;
+
+    declare
+    @nombre varchar(20),
+    @apellido varchar(20)
+
+    select @nombre = nombre,@apellido = apellido 
+    from inserted
+
+    declare
+    @direccion varchar(100),
+    @edad int
+
+    set @direccion='Av 15, Santa Marina'
+    set @edad = 22
+
+    begin
+        insert into Empleado_Log values(@nombre,@apellido,@direccion,@edad )
+    end
+}
+*/
+
 function crearfacultad(){
         if($_SERVER['REQUEST_METHOD']=="POST"){
         $conexion=conectar_base_de_datos();
         $nombre= $_POST['nombre'];
         $codigo =$_POST['codigo'];
-        
         $consulta = "INSERT INTO facultad VALUES('$codigo','$nombre')";
         mysqli_query($conexion, $consulta);
+
         
         cerrar_conexion_db($conexion);
         
     }
+    header("Location: /boot/index.php/succes");
 
 }
 

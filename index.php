@@ -78,6 +78,13 @@ session_start();
       if($uri=="/boot/index.php/consultar/searchjura"){
      enviarjura_consulta();
     }
+<<<<<<< HEAD
+=======
+
+        if($uri=="/boot/index.php/sistema?registrar=p"){
+     logueosuccesaction();
+    }
+>>>>>>> origin/master
     
         if($uri=="/boot/index.php/sistema?registrar=e"){
      logueosuccesaction();
@@ -90,6 +97,10 @@ session_start();
     
        if($uri=="/boot/index.php/regestudiante.php"){
      registrarestudiante();
+    }
+
+       if($uri=="/boot/index.php/regproyecto.php"){
+     registrarproyecto();
     }
 
        if($uri=="/boot/index.php/regdocentes.php"){
