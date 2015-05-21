@@ -1,8 +1,7 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-   
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php include "inc/head_common.php" ?>
     
@@ -28,7 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/boot/index.php/home">Inicio</a>
+          <a class="navbar-brand" href="#">Inicio</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action='/boot/index.php/loggin.php' method='post'>
@@ -63,7 +62,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Ultimos proyectos</h1>
-        <p>En esta pagina web usted prodra consultar cualquier proyecto, pasantia de la universidad de cundinamarca que se encuentre en proceso o aprobado, por favor haga clic en consultar</p>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-lg" href="/boot/index.php/consultar" role="button">Consultar &raquo;</a></p>
       </div>
     </div>
@@ -72,27 +71,19 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>
-          <?php 
-          echo utf8_encode($_SESSION['proyectos_home'][0]); 
-          ?>
-          </h2>
-          <p>Para todo el resumen del proyecto clic abajo</p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][0] ?>" role="button">Ver &raquo;</a></p>
+          <h2>Aplicacion de reconocimiento facial</h2>
+          <p>Todo el resumen de la aplicacion o proyecto de grado va aqui</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-          <h2><?php 
-          echo utf8_encode($_SESSION['proyectos_home'][1]); 
-          ?></h2>
-          <p>Para todo el resumen del proyecto clic abajo </p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][1] ?>" role="button">Ver &raquo;</a></p>
+          <h2>inclusion de las TICS en escuelas</h2>
+          <p>Todo el resumen de la aplicacion o proyecto de grado va aqui</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
-          <h2><?php 
-          echo utf8_encode($_SESSION['proyectos_home'][2]); 
-          ?></h2>
-          <p>Para todo el resumen del proyecto clic abajo</p>
-          <p><a class="btn btn-default" href="/boot/index.php/consultar_proyecto?No_proyecto=<?php echo $_SESSION['proyectos_id'][2] ?>" role="button">Ver &raquo;</a></p>
+          <h2>Ingenieria de software en el futuro</h2>
+          <p>Todo el resumen de la aplicacion o proyecto de grado va aqui</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
 

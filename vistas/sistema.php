@@ -57,16 +57,18 @@ if (isset($_SESSION['nivel'])){
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="/boot/index.php/sistema?registrar=p">Registrar proyecto</a>
+                    <a href="#">
+                        Registrar Proyecto
+                    </a>
                 </li>
                 <li>
                     <a href="/boot/index.php/sistema?registrar=e">Registrar estudiantes</a>
                 </li>
                 <li>
-                    <a href="/boot/index.php/sistema?registrar=j">Registrar docentes</a>
+                    <a href="#">Registrar jurados</a>
                 </li>
                 <li>
-                    <a href="/boot/index.php/sistema?registrar=f">Registrar facultad</a>
+                    <a href="#">Registrar directores</a>
                 </li>
                 <li>
                     <a href="#">Events</a>
@@ -93,24 +95,9 @@ if (isset($_SESSION['nivel'])){
                     <div class="col-lg-6">
                         <h1>
                            <?php 
-
-                        if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='p'){
-                          echo "Registro de Proyectos";
-                          }}
-
                         if (isset($_GET['registrar'])){
                           if($_GET['registrar']=='e'){
                           echo "Registro de Estudiantes";
-                          }}
-
-                        if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='j'){
-                          echo "Registro de docentes";
-                          }}
-                          if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='f'){
-                          echo "Registro de facultad";
                           }}
                         ?>
 
@@ -119,22 +106,8 @@ if (isset($_SESSION['nivel'])){
                         <?php 
 
                         if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='p'){
-                          include "/vistas/registrarproyecto.php";
-                          }}
-
-                        if (isset($_GET['registrar'])){
                           if($_GET['registrar']=='e'){
                           include "/vistas/registrarestudiante.php";
-                          }}
-
-                        if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='j'){
-                          include "/vistas/registrardocentes.php";
-                          }}
-                          if (isset($_GET['registrar'])){
-                          if($_GET['registrar']=='f'){
-                          include "/vistas/registrarfacultad.php";
                           }}
                         ?>
         

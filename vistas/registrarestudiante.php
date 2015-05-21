@@ -22,7 +22,7 @@
      <div class="form-group" id='email1' style="display: none;">
          <label for="inputEmail" class="control-label col-xs-2">Email2:</label>
          <div class="col-xs-10">
-             <input type="email" class="form-control" name ='email1' placeholder="Email" name='email2'>
+             <input type="number" class="form-control" name ='email1' placeholder="Email" name='email2'>
          </div>
 
      </div>
@@ -48,7 +48,15 @@
      </div>
 
 
- 
+ <div class="form-group">
+         <label for="inputEmail" class="control-label col-xs-2">Programa:</label>
+         <div class="col-xs-10">
+              <select class="form-control" name="programa">
+              <option>Sistemas</option>
+              <option>electronica</option>
+  </select>
+         </div>
+     </div>
      <div class="form-group">
          <div class="col-xs-offset-2 col-xs-10">
              <button type="submit" class="btn btn-primary">Registrar</button>

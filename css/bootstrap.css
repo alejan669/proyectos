@@ -9,8 +9,10 @@
   color: #FF0000;
 }
 #opc{
+  border: 1px solid black;
+  -moz-border-radius: 7px;
+-webkit-border-radius: 7px;
 padding: 10px;
-
 }
 #esp{
   margin-top: 15px;

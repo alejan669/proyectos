@@ -18,8 +18,8 @@
 //crear una table de taboritos
 	$sql = "CREATE TABLE admins
 	(
-	nombre char(25) not null,
-	apellido char(25),
+	nombre char(40) not null,
+	apellido char(40),
 	pass char(40) not null,
 	correo char(80) not null,
 	PRIMARY KEY (correo),
@@ -31,139 +31,69 @@
 	mysql_query("INSERT INTO admins(nombre, apellido, pass, correo, nivel) VALUES ('diego','franco','b674a43d6710dc308bfd53404d88d0b5f46edf15','diego.fc.1@hotmail.com',3)");
 	
 
-
-//////////////////
-		$sql = "CREATE TABLE facultad
-	(
-	cod_facultad char(9) not null,
-	primary key(cod_facultad),
-	nombre char(25)
-	)";
-	mysql_query($sql,$conexion);
-
-	mysql_query("INSERT INTO facultad(cod_facultad, nombre) VALUES ('1','ingenieria')");
-
-	
-
-///////////////////////////////////////
-	
-	$sql = "CREATE TABLE programa
-	(
-   	codigo_programa char(9) not null,
-	PRIMARY KEY (codigo_programa),
-    nombre char(25),
-    programa_facultad char(9) not null,
-     FOREIGN KEY (programa_facultad) REFERENCES facultad(cod_facultad)
-	)";
-	mysql_query($sql,$conexion);
-
-	mysql_query("INSERT INTO programa(codigo_programa, nombre, programa_facultad) VALUES ('1','ingenieria de sistemas','1')");
-
-
-
-	$sql = "CREATE TABLE linea_investigacion
-	(
-   	codigo_linea char(9) not null ,
-	PRIMARY KEY (codigo_linea),
-    nombre char(25) not null,
-	linea_programa char(9) not null,
-	FOREIGN KEY (linea_programa) REFERENCES programa(codigo_programa)
-	)";
-	mysql_query($sql,$conexion);
-
-	mysql_query("INSERT INTO linea_investigacion(codigo_linea, nombre, linea_programa) VALUES ('1','software','1')");
-
-
 	
 	$sql = "CREATE TABLE proyecto
 	(
-   	codigo_proyecto char(9) not null,
-   	fecha_inicio date,
-   	fecha_final date,
-   	titulo char(150) not null,
-	PRIMARY KEY(codigo_proyecto),
+   	id int not null AUTO_INCREMENT,
+   	fecha date not null,
+   	titulo char(50) not null,
+	linea char(40) not null,
+	PRIMARY KEY(id),
 	resumen char(255) not null,
-	link char(255),
-	proyecto_linea char(9) not null,
-	FOREIGN KEY (proyecto_linea) REFERENCES linea_investigacion(codigo_linea)
+	estado char(30) not null
 	)";
 	mysql_query($sql,$conexion);
 
 	//contenido de prueba
-	mysql_query("INSERT INTO proyecto(codigo_proyecto, fecha_inicio, fecha_final, titulo, resumen, link, proyecto_linea ) VALUES ('20150101','2015/02/28','2015/03/24','reconocimiento facial','software de sistema de reconocimiento facial version 1.1 ','https/mega/121314','1')");
+	mysql_query("INSERT INTO proyecto(fecha, titulo, linea, resumen, estado) VALUES ('2015/02/28','reconocimiento facial','software','software de sistema de reconocimiento facial version 1.1 ','APROBADO')");
 
-
-
-	
-
-
-    $sql = "CREATE TABLE persona
+    $sql = "CREATE TABLE estudiantes
 	(
-	codigo_persona char(9) not null,
-	PRIMARY KEY(codigo_persona),
-   	nombre char(30) not null,
-   	apellido char(30) not null
+		codigo char(9) not null,
+   	id_proyecto int not null,
+   	nombre char(50) not null,
+   	apellido char(50) not null,
+	
+	PRIMARY KEY(codigo),
+	programa char(30) not null,
+	FOREIGN KEY (id_proyecto) REFERENCES proyecto(id)
 	)";
 	
 	mysql_query($sql,$conexion);
 	
 	//contenido de prueba
-	mysql_query("INSERT INTO persona(codigo_persona, nombre, apellido) VALUES ('161212116','diego','franco')");
+	mysql_query("INSERT INTO estudiantes(id_proyecto, nombre, apellido, codigo, programa) VALUES ('1','diego','franco','161212116','ingenieria de sistemas')");
 
 
-////////////////////////////////campo multivaluado telefono para persona
-
-	$sql = "CREATE TABLE persona_telefono
+	$sql = "CREATE TABLE estudiante_telefono
 	(
-   	codigo_persona char(9) not null,
+   	codigo_estudiante char(9) not null,
    	telefono char(20) not null,
    	
-	PRIMARY KEY(codigo_persona,telefono),
-	FOREIGN KEY (codigo_persona) REFERENCES persona(codigo_persona)
+	PRIMARY KEY(codigo_estudiante,telefono),
+	FOREIGN KEY (codigo_estudiante) REFERENCES estudiantes(codigo)
 	)";
 	
 
 mysql_query($sql,$conexion);
 
 	//contenido de prueba
-	mysql_query("INSERT INTO persona_telefono(codigo_persona, telefono) VALUES ('161212116','3204599793')");
+	mysql_query("INSERT INTO estudiante_telefono(codigo_estudiante, telefono) VALUES ('161212116','3204599793')");
 
-//////////////////////////////campo multivaluado EMAIL para persona
 
-	$sql = "CREATE TABLE persona_email
+	$sql = "CREATE TABLE estudiante_email
 	(
-   	codigo_persona char(9) not null,
+   	codigo_estudiante char(9) not null,
    	email char(50) not null,
    	
-	PRIMARY KEY(codigo_persona,email),
-	FOREIGN KEY (codigo_persona) REFERENCES persona(codigo_persona)
+	PRIMARY KEY(codigo_estudiante,email),
+	FOREIGN KEY (codigo_estudiante) REFERENCES estudiantes(codigo)
 	)";
-	
-
-mysql_query($sql,$conexion);
-
-	//contenido de prueba
-	mysql_query("INSERT INTO persona_email(codigo_persona, email) VALUES ('161212116','diego.fc.1@hotmail.com')");
-
-///////////////////////////relacion proyecto_persona
-
-$sql = "CREATE TABLE proyecto_persona
-	(
-	
-	codigo_proyecto char(8) not null,
-	codigo_persona char(9) not null,
-	estado char(1) not null,
-	tipo char(1) not null,
-	primary key(codigo_proyecto,codigo_persona),
-	FOREIGN KEY (codigo_persona) REFERENCES persona(codigo_persona),
-	FOREIGN KEY (codigo_proyecto) REFERENCES proyecto(codigo_proyecto)
-
-		)";
-
-
 	mysql_query($sql,$conexion);
 
-mysql_close($conexion);
+	//contenido de prueba
+	mysql_query("INSERT INTO estudiante_email(codigo_estudiante, email) VALUES ('161212116','diego.fc.1@hotmail.com')");
 
+mysql_close($conexion);
 
 ?>
